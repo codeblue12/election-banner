@@ -215,6 +215,7 @@ body.curtained{overflow:hidden}
   const SONG_DATA_URI = "";
   // YouTube audio (starts on the first tap). Falls back to the built-in jingle if it can't play.
   const YT_ID = "uKQTz30SR9s";
+  const ALLOW_JINGLE = false; // true = play the built-in synth jingle when YouTube cannot play
 
   const $ = s => document.querySelector(s);
   const reduceMQ = matchMedia('(prefers-reduced-motion: reduce)');
@@ -540,7 +541,7 @@ body.curtained{overflow:hidden}
     if (s >= 29) snare(t + E8 / 2, 0.18); // roll into the loop
   }
   function startJingle() {
-    if (!ctx || schedTimer) return;
+    if (!ALLOW_JINGLE || !ctx || schedTimer) return;
     let step = 0, next = ctx.currentTime + 0.08;
     schedTimer = setInterval(() => {
       if (next < ctx.currentTime - 0.05) next = ctx.currentTime + 0.05; // recover after tab throttling
