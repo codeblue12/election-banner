@@ -12,7 +12,7 @@
 <style>
 /* ---------- Tokens (fixed rally-poster palette in every theme) ---------- */
 :root{
-  --ink:#0E1838; --ink-2:#18265C; --gold:#FFC23D; --coral:#FF6A55; --blue:#2E7BFF; --cream:#FFF3DA;
+  --ink:#14060A; --ink-2:#5E0C17; --gold:#D92D3A; --coral:#A3182A; --blue:#000000; --cream:#F7EFE2;
   --display:"Anton","Impact","Haettenschweiler","Arial Narrow Bold",sans-serif;
   --body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   color-scheme:dark;
@@ -20,16 +20,16 @@
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
 }
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --ink:#0E1838; --cream:#FFF3DA; } }
-:root[data-theme="dark"]{ --ink:#0E1838; --cream:#FFF3DA; }
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --ink:#14060A; --cream:#F7EFE2; } }
+:root[data-theme="dark"]{ --ink:#14060A; --cream:#F7EFE2; }
 *,*::before,*::after{box-sizing:inherit}
 html{height:100%;background:var(--ink);scroll-padding-top:env(safe-area-inset-top,0px)}
 body{
   margin:0;min-height:100%;display:flex;flex-direction:column;
   color:var(--cream);font-family:var(--body);
   background:
-    radial-gradient(circle,rgba(255,243,218,.07) 1.2px,transparent 1.7px) 0 0/15px 15px,
-    radial-gradient(ellipse at 50% 30%,#1B2C68 0%,var(--ink) 65%);
+    radial-gradient(circle,rgba(247,239,226,.10) 1.4px,transparent 1.9px) 0 0/18px 18px,
+    radial-gradient(ellipse at 50% 30%,#7A1220 0%,var(--ink) 65%);
   background-color:var(--ink);
   overflow-x:hidden;-webkit-tap-highlight-color:transparent;
 }
@@ -43,9 +43,9 @@ button{font:inherit}
 .bunting{position:absolute;top:0;left:0;right:0;height:44px;display:flex;justify-content:center;overflow:hidden;pointer-events:none}
 .bunting::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--cream);opacity:.8}
 .bunting span{flex:0 0 42px;height:40px;margin:2px 3px 0;clip-path:polygon(0 0,100% 0,50% 100%)}
-.bunting span:nth-child(3n+1){background:var(--gold)}
-.bunting span:nth-child(3n+2){background:var(--coral)}
-.bunting span:nth-child(3n+3){background:var(--blue)}
+.bunting span:nth-child(3n+1){background:var(--cream)}
+.bunting span:nth-child(3n+2){background:var(--gold)}
+.bunting span:nth-child(3n+3){background:#000}
 
 .vote{font-family:var(--display);font-weight:400;margin:0;color:var(--gold);
   font-size:clamp(5rem,min(27vw,24vh),17rem);line-height:.8;letter-spacing:.01em;text-transform:uppercase;
@@ -62,7 +62,7 @@ button{font:inherit}
 .choices{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;align-items:center;margin-top:1.35rem}
 .btn{font-weight:800;font-size:clamp(.98rem,2.6vw,1.08rem);line-height:1.15;padding:1rem 1.35rem;border:3px solid var(--cream);
   cursor:pointer;touch-action:manipulation;border-radius:0;white-space:nowrap}
-.yes{background:var(--gold);color:var(--ink);box-shadow:6px 6px 0 var(--blue);transition:transform .12s,box-shadow .12s;
+.yes{background:var(--gold);color:var(--cream);box-shadow:6px 6px 0 var(--blue);transition:transform .12s,box-shadow .12s;
   animation:beckon 1.6s ease-in-out infinite}
 .yes:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--blue)}
 .yes:active{transform:translate(4px,4px);box-shadow:2px 2px 0 var(--blue)}
@@ -81,7 +81,7 @@ button{font:inherit}
 body.live .show{display:block}
 body.live .no{display:none}
 .rays{position:absolute;left:50%;top:45%;width:260vmax;height:260vmax;margin:-130vmax 0 0 -130vmax;
-  background:repeating-conic-gradient(from 0deg,rgba(46,123,255,.16) 0 9deg,transparent 9deg 18deg);
+  background:repeating-conic-gradient(from 0deg,rgba(0,0,0,.28) 0 9deg,transparent 9deg 18deg);
   animation:spin 48s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 #confetti{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
@@ -95,13 +95,13 @@ body.live .no{display:none}
   font-size:clamp(3.6rem,min(19vw,21vh),15rem);line-height:.86;margin-top:.06em;
   text-shadow:.035em .035em 0 var(--coral),.07em .07em 0 var(--blue)}
 .s-name span{display:block}
-.s-sub{margin-top:clamp(1rem,3vh,1.8rem);background:var(--coral);color:var(--ink);font-weight:900;
+.s-sub{margin-top:clamp(1rem,3vh,1.8rem);background:var(--coral);color:var(--cream);font-weight:900;
   font-size:clamp(.95rem,2.6vw,1.2rem);padding:.55rem 1rem;border:3px solid var(--cream);transform:rotate(-2deg)}
-.ticker{position:absolute;left:0;right:0;bottom:0;background:var(--gold);color:var(--ink);border-top:4px solid var(--cream);
+.ticker{position:absolute;left:0;right:0;bottom:0;background:var(--gold);color:var(--cream);border-top:4px solid var(--cream);
   padding:.65rem 0 calc(.65rem + env(safe-area-inset-bottom,0px));overflow:hidden;white-space:nowrap}
 .track{display:inline-flex;animation:tick 32s linear infinite}
 .track span{font-family:var(--display);text-transform:uppercase;font-size:clamp(1.25rem,3.4vw,2rem);line-height:1.1;padding-right:1.6rem}
-.track b{color:var(--blue);font-weight:400;padding-right:1.6rem;font-family:var(--display);font-size:clamp(1.25rem,3.4vw,2rem)}
+.track b{color:#000;font-weight:400;padding-right:1.6rem;font-family:var(--display);font-size:clamp(1.25rem,3.4vw,2rem)}
 @keyframes tick{to{transform:translateX(-50%)}}
 .close{position:fixed;z-index:2147483100;top:calc(.9rem + env(safe-area-inset-top,0px));right:calc(.9rem + env(safe-area-inset-right,0px));
   background:var(--cream);color:var(--ink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--coral);
@@ -111,7 +111,7 @@ body.live .no{display:none}
 /* ---------- Taunt toast ---------- */
 .toast{position:fixed;left:50%;bottom:calc(1.4rem + env(safe-area-inset-bottom,0px));z-index:2147483647;
   transform:translate(-50%,160%);opacity:0;pointer-events:none;max-width:min(92vw,30rem);text-align:center;
-  background:var(--coral);color:var(--ink);font-weight:900;font-size:1.02rem;line-height:1.3;padding:.8rem 1.2rem;
+  background:var(--coral);color:var(--cream);font-weight:900;font-size:1.02rem;line-height:1.3;padding:.8rem 1.2rem;
   border:3px solid var(--cream);box-shadow:5px 5px 0 var(--gold);transition:transform .25s cubic-bezier(.3,1.4,.5,1),opacity .2s}
 .toast.on{transform:translate(-50%,0);opacity:1}
 body.live .toast{bottom:calc(5.4rem + env(safe-area-inset-bottom,0px))}
@@ -126,6 +126,38 @@ body.live .toast{bottom:calc(5.4rem + env(safe-area-inset-bottom,0px))}
   .ticker{white-space:normal}
 }
 
+/* ---------- Clash banner: two portraits drift apart, rush back, collide in the middle, drift apart again ---------- */
+.clash{position:fixed;left:0;right:0;top:calc(.6rem + env(safe-area-inset-top,0px));height:var(--S);z-index:2147483050;pointer-events:none;
+  --S:clamp(68px,17vw,150px);--edge:12px;--D:calc(50vw - var(--S) - var(--edge));--T:9s}
+.fighter{position:absolute;top:0;left:50%;width:var(--S);height:var(--S);will-change:transform}
+.fighter.a{margin-left:calc(var(--S) * -1);animation:fa var(--T) infinite}
+.fighter.b{animation:fb var(--T) infinite}
+.fighter img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;background:var(--cream);
+  border:4px solid var(--cream);box-shadow:0 0 0 3px var(--gold),0 8px 20px rgba(0,0,0,.65);animation:bob 2.2s ease-in-out infinite}
+.fighter.b img{animation-delay:-1.1s}
+@keyframes bob{50%{transform:translateY(-8px)}}
+@keyframes fa{
+  0%,12%{transform:translateX(calc(var(--D) * -1)) rotate(0);animation-timing-function:cubic-bezier(.7,0,1,.75)}
+  28%{transform:translateX(0) rotate(0) scale(1)}
+  30%{transform:translateX(-12px) rotate(-14deg) scale(.88)}
+  34%{transform:translateX(0) rotate(4deg) scale(1.05)}
+  38%{transform:translateX(0) rotate(0) scale(1);animation-timing-function:cubic-bezier(.35,0,.25,1)}
+  62%,100%{transform:translateX(calc(var(--D) * -1)) rotate(0)}}
+@keyframes fb{
+  0%,12%{transform:translateX(var(--D)) rotate(0);animation-timing-function:cubic-bezier(.7,0,1,.75)}
+  28%{transform:translateX(0) rotate(0) scale(1)}
+  30%{transform:translateX(12px) rotate(14deg) scale(.88)}
+  34%{transform:translateX(0) rotate(-4deg) scale(1.05)}
+  38%{transform:translateX(0) rotate(0) scale(1);animation-timing-function:cubic-bezier(.35,0,.25,1)}
+  62%,100%{transform:translateX(var(--D)) rotate(0)}}
+.boom{position:absolute;left:50%;top:50%;width:calc(var(--S) * 1.5);height:calc(var(--S) * 1.5);margin:calc(var(--S) * -.75) 0 0 calc(var(--S) * -.75);
+  border-radius:50%;opacity:0;transform:scale(.2);animation:boom var(--T) infinite;
+  background:radial-gradient(circle,#fff 0,rgba(247,239,226,.95) 16%,rgba(217,45,58,.75) 42%,rgba(217,45,58,0) 70%)}
+@keyframes boom{0%,27.5%{opacity:0;transform:scale(.2)}29%{opacity:1;transform:scale(.7)}33%{opacity:.85;transform:scale(1.6)}40%,100%{opacity:0;transform:scale(2.3)}}
+@media (prefers-reduced-motion: reduce){
+  .fighter.a,.fighter.b,.fighter img,.boom{animation:none}
+  .fighter.a{transform:translateX(calc(var(--D) * -1))}.fighter.b{transform:translateX(var(--D))}.boom{display:none}}
+
 /* ---------- Curtains ---------- */
 html,body{overscroll-behavior:none}
 body.curtained{overflow:hidden}
@@ -138,12 +170,12 @@ body.curtained{overflow:hidden}
     repeating-linear-gradient(90deg,rgba(0,0,0,.38) 0,rgba(0,0,0,0) 3.5%,rgba(255,255,255,.07) 7%,rgba(0,0,0,.38) 10.5%),
     linear-gradient(180deg,#7d0f1f,#4d0711 85%,#2e040a);
   box-shadow:inset 0 0 90px rgba(0,0,0,.6)}
-.curtain.l{transform-origin:left;border-right:5px solid var(--gold);box-shadow:inset 0 0 90px rgba(0,0,0,.6),8px 0 28px rgba(0,0,0,.5)}
-.curtain.r{transform-origin:right;border-left:5px solid var(--gold);box-shadow:inset 0 0 90px rgba(0,0,0,.6),-8px 0 28px rgba(0,0,0,.5)}
+.curtain.l{transform-origin:left;border-right:5px solid var(--cream);box-shadow:inset 0 0 90px rgba(0,0,0,.6),8px 0 28px rgba(0,0,0,.5)}
+.curtain.r{transform-origin:right;border-left:5px solid var(--cream);box-shadow:inset 0 0 90px rgba(0,0,0,.6),-8px 0 28px rgba(0,0,0,.5)}
 .curtains::before{content:'';position:absolute;left:0;right:0;top:0;height:2.4rem;z-index:2;
-  background:linear-gradient(180deg,#d9a21b,#ffc23d 45%,#8a6000);box-shadow:0 6px 14px rgba(0,0,0,.5)}
+  background:linear-gradient(180deg,#cfc6b6,#f7efe2 45%,#8c8576);box-shadow:0 6px 14px rgba(0,0,0,.5)}
 .curtains::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1.1rem;z-index:2;
-  background:repeating-linear-gradient(90deg,#ffc23d 0 6px,#8a6000 6px 9px)}
+  background:repeating-linear-gradient(90deg,#f7efe2 0 6px,#14060a 6px 9px)}
 .curtains.open .curtain.l{transform:translateX(-102%) scaleX(.82)}
 .curtains.open .curtain.r{transform:translateX(102%) scaleX(.82)}
 .curtains.open::before,.curtains.open::after{opacity:0;transition:opacity .9s ease .9s}
@@ -151,7 +183,7 @@ body.curtained{overflow:hidden}
   font-family:var(--display);text-transform:uppercase;letter-spacing:.06em;font-size:clamp(1.4rem,4.6vw,2.6rem);
   color:var(--cream);text-shadow:0 3px 0 rgba(0,0,0,.55);pointer-events:none;animation:cpulse 1.6s ease-in-out infinite;
   transition:opacity .35s ease}
-.curtain-hint small{display:block;margin-top:.5rem;font-size:.42em;letter-spacing:.14em;color:var(--gold)}
+.curtain-hint small{display:block;margin-top:.5rem;font-size:.42em;letter-spacing:.14em;color:var(--cream);opacity:.8}
 .curtains.open .curtain-hint{opacity:0;animation:none}
 @keyframes cpulse{50%{transform:translate(-50%,-50%) scale(1.06)}}
 @media (prefers-reduced-motion: reduce){.curtain{transition-duration:.6s}.curtain-hint{animation:none}}
@@ -181,7 +213,7 @@ body.curtained{overflow:hidden}
     </div>
   </section>
 
-  <p class="hint">Tap the green button to make it official.</p>
+  <p class="hint">Tap the red button to make it official.</p>
   <div class="stamp">Paid for by the Committee to Elect Eishah Nadeem. Campaign budget: one samosa.</div>
 </main>
 
@@ -197,6 +229,12 @@ body.curtained{overflow:hidden}
   </div>
   <div class="ticker" aria-hidden="true"><div class="track" id="track"></div></div>
   <button class="close dodger" id="close" type="button">✕ Close</button>
+</div>
+
+<div class="clash" aria-hidden="true">
+  <div class="fighter a"><img src="banner1.webp" alt="" draggable="false"></div>
+  <div class="fighter b"><img src="banner2.webp" alt="" draggable="false"></div>
+  <div class="boom"></div>
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -617,7 +655,7 @@ body.curtained{overflow:hidden}
 
   /* ---------- Confetti ---------- */
   const cv = $('#confetti'), cx = cv.getContext('2d');
-  const COLORS = ['#FFC23D', '#FF6A55', '#2E7BFF', '#FFF3DA'];
+  const COLORS = ['#D92D3A', '#F7EFE2', '#FFFFFF', '#A3182A'];
   let W = 0, H = 0, parts = [], raf = 0, lastT = 0;
   function sizeCanvas() {
     if (!live) return;
