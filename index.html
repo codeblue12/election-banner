@@ -146,7 +146,7 @@ body.live .toast{bottom:calc(5.4rem + env(safe-area-inset-bottom,0px))}
     </div>
   </section>
 
-  <p class="hint">Tap anywhere to make it official.</p>
+  <p class="hint">Tap the green button to make it official.</p>
   <div class="stamp">Paid for by the Committee to Elect Eishah Nadeem. Campaign budget: one samosa.</div>
 </main>
 
@@ -346,9 +346,9 @@ body.live .toast{bottom:calc(5.4rem + env(safe-area-inset-bottom,0px))}
     toast.classList.remove('on');
   }
 
-  document.addEventListener('click', () => {
+  document.addEventListener('click', e => {
     if (performance.now() < blockClickUntil) return;
-    if (!live) { launch(); return; }
+    if (!live) { if (e.target.closest('#yes')) launch(); return; } // vote window opens only from the 'I will vote' button
     if (!isFull()) goFull();
     resumeAudio();
   });
@@ -360,7 +360,7 @@ body.live .toast{bottom:calc(5.4rem + env(safe-area-inset-bottom,0px))}
     if (f === noBtn || f === closeBtn) { e.preventDefault(); active().jump(); return; }
     if (!live) {
       if (f === yesBtn && (e.key === 'Enter' || e.key === ' ')) return; // native click launches
-      e.preventDefault(); launch();
+      return; // only the 'I will vote' button opens the vote window
     } else {
       e.preventDefault();
       if (!isFull()) goFull();
@@ -378,9 +378,9 @@ body.live .toast{bottom:calc(5.4rem + env(safe-area-inset-bottom,0px))}
     window.onYouTubeIframeAPIReady = () => {
       yt = new YT.Player('ytp', {
         width: '200', height: '200', videoId: YT_ID,
-        playerVars: { playsinline: 1, controls: 0, disablekb: 1, rel: 0, loop: 1, playlist: YT_ID },
+        playerVars: { playsinline: 1, controls: 0, disablekb: 1, rel: 0, loop: 1, playlist: YT_ID, autoplay: 1, mute: 1 },
         events: {
-          onReady: () => { ytReady = true; if (ytWant) yt.playVideo(); },
+          onReady: () => { ytReady = true; yt.mute(); yt.playVideo(); },
           onStateChange: e => { if (e.data === 1) { ytPlaying = true; stopJingle(); } },
           onError: () => { ytFailed = true; if (live) startJingle(); }
         }
@@ -513,6 +513,12 @@ body.live .toast{bottom:calc(5.4rem + env(safe-area-inset-bottom,0px))}
   // first tap/click/key, in which case launch() -> startAudio() (idempotent) takes over.
   startAudio();
   goFull(); // fullscreen is also blocked until a first tap/click/key, so launch() retries on the first gesture
+
+  // The song starts muted on load (browsers allow muted autoplay) and is un-muted on the first real gesture.
+  const unmuteYT = () => {
+    if (yt && ytReady && !ytFailed) { if (yt.isMuted()) { yt.unMute(); yt.setVolume(100); } if (yt.getPlayerState() !== 1) yt.playVideo(); }
+  };
+  ['pointerdown', 'touchstart', 'keydown', 'click'].forEach(t => document.addEventListener(t, unmuteYT, { capture: true, passive: true }));
 
   // Also try on any pointer/touch/mouse movement. Hover alone is not a user gesture, so browsers
   // usually ignore it until a real tap/click/key; the attempts are harmless and throttled.
