@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vote Eishah Nadeem</title>
+<meta name="theme-color" content="#0E1838">
+<meta name="description" content="Will you vote for Eishah Nadeem?">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ---------- Tokens (fixed rally-poster palette in every theme) ---------- */
+:root{
+  --ink:#0E1838; --ink-2:#18265C; --gold:#FFC23D; --coral:#FF6A55; --blue:#2E7BFF; --cream:#FFF3DA;
+  --display:"Anton","Impact","Haettenschweiler","Arial Narrow Bold",sans-serif;
+  --body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color-scheme:dark;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --ink:#0E1838; --cream:#FFF3DA; } }
+:root[data-theme="dark"]{ --ink:#0E1838; --cream:#FFF3DA; }
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;background:var(--ink);scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0;min-height:100%;display:flex;flex-direction:column;
+  color:var(--cream);font-family:var(--body);
+  background:
+    radial-gradient(circle,rgba(255,243,218,.07) 1.2px,transparent 1.7px) 0 0/15px 15px,
+    radial-gradient(ellipse at 50% 30%,#1B2C68 0%,var(--ink) 65%);
+  background-color:var(--ink);
+  overflow-x:hidden;-webkit-tap-highlight-color:transparent;
+}
+body.live{overflow:hidden}
+button{font:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+
+/* ---------- Landing ---------- */
+.landing{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:3.75rem 1.25rem 1.75rem;cursor:pointer;user-select:none;-webkit-user-select:none}
+.bunting{position:absolute;top:0;left:0;right:0;height:44px;display:flex;justify-content:center;overflow:hidden;pointer-events:none}
+.bunting::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--cream);opacity:.8}
+.bunting span{flex:0 0 42px;height:40px;margin:2px 3px 0;clip-path:polygon(0 0,100% 0,50% 100%)}
+.bunting span:nth-child(3n+1){background:var(--gold)}
+.bunting span:nth-child(3n+2){background:var(--coral)}
+.bunting span:nth-child(3n+3){background:var(--blue)}
+
+.vote{font-family:var(--display);font-weight:400;margin:0;color:var(--gold);
+  font-size:clamp(5rem,min(27vw,24vh),17rem);line-height:.8;letter-spacing:.01em;text-transform:uppercase;
+  text-shadow:.045em .045em 0 var(--blue)}
+.stars{font-size:clamp(1rem,3vw,1.6rem);color:var(--coral);letter-spacing:.6em;margin:.5rem 0 .2rem;padding-left:.6em}
+.name{font-family:var(--display);font-weight:400;margin:0;color:var(--cream);text-transform:uppercase;
+  font-size:clamp(2.7rem,min(12.8vw,12vh),8.6rem);line-height:.9;letter-spacing:.01em;
+  text-shadow:.04em .04em 0 var(--coral),.08em .08em 0 var(--blue)}
+.tagline{max-width:34ch;margin:1.6rem auto 0;font-weight:700;font-size:clamp(1rem,2.6vw,1.2rem);line-height:1.45;opacity:.88}
+
+.ballot{margin-top:2.2rem;width:100%;max-width:40rem;background:var(--ink-2);border:3px solid var(--cream);
+  box-shadow:10px 10px 0 var(--coral);padding:1.5rem 1.25rem 1.75rem;transform:rotate(-1.2deg);cursor:default}
+.ballot h2{font-family:var(--display);font-weight:400;margin:0;font-size:clamp(1.7rem,5.2vw,2.5rem);line-height:1.05;color:var(--cream)}
+.choices{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;align-items:center;margin-top:1.35rem}
+.btn{font-weight:800;font-size:clamp(.98rem,2.6vw,1.08rem);line-height:1.15;padding:1rem 1.35rem;border:3px solid var(--cream);
+  cursor:pointer;touch-action:manipulation;border-radius:0;white-space:nowrap}
+.yes{background:var(--gold);color:var(--ink);box-shadow:6px 6px 0 var(--blue);transition:transform .12s,box-shadow .12s;
+  animation:beckon 1.6s ease-in-out infinite}
+.yes:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--blue)}
+.yes:active{transform:translate(4px,4px);box-shadow:2px 2px 0 var(--blue)}
+@keyframes beckon{0%,100%{transform:rotate(0)}8%{transform:rotate(-2deg)}16%{transform:rotate(2deg)}24%{transform:rotate(0)}}
+.no{background:var(--ink-2);color:var(--cream)}
+.ph{display:inline-block}
+.dodger.loose{position:fixed;margin:0;z-index:60;
+  transition:left .22s cubic-bezier(.3,1.5,.5,1),top .22s cubic-bezier(.3,1.5,.5,1)}
+.hint{margin:1.9rem 0 0;font-size:.98rem;font-weight:500;opacity:.75}
+.stamp{margin-top:2.6rem;display:inline-block;border:1.5px dashed rgba(255,243,218,.5);padding:.45rem .8rem;
+  font-size:.74rem;line-height:1.4;opacity:.65;transform:rotate(1deg)}
+
+/* ---------- The show ---------- */
+.show{position:fixed;inset:0;z-index:2147483000;display:none;background:var(--ink);overflow:hidden;cursor:default;
+  user-select:none;-webkit-user-select:none}
+body.live .show{display:block}
+body.live .no{display:none}
+.rays{position:absolute;left:50%;top:45%;width:260vmax;height:260vmax;margin:-130vmax 0 0 -130vmax;
+  background:repeating-conic-gradient(from 0deg,rgba(46,123,255,.16) 0 9deg,transparent 9deg 18deg);
+  animation:spin 48s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#confetti{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.stage{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:calc(4.5rem + env(safe-area-inset-top,0px)) 1rem calc(6rem + env(safe-area-inset-bottom,0px))}
+.throb{animation:throb .857s ease-in-out infinite;transform-origin:50% 55%}
+@keyframes throb{0%,100%{transform:scale(1)}18%{transform:scale(1.075)}45%{transform:scale(.99)}}
+.s-vote{display:block;font-family:var(--display);color:var(--gold);text-transform:uppercase;
+  font-size:clamp(2.4rem,min(10vw,13vh),7.5rem);line-height:.9;text-shadow:.05em .05em 0 var(--blue)}
+.s-name{display:block;font-family:var(--display);color:var(--cream);text-transform:uppercase;
+  font-size:clamp(3.6rem,min(19vw,21vh),15rem);line-height:.86;margin-top:.06em;
+  text-shadow:.035em .035em 0 var(--coral),.07em .07em 0 var(--blue)}
+.s-name span{display:block}
+.s-sub{margin-top:clamp(1rem,3vh,1.8rem);background:var(--coral);color:var(--ink);font-weight:900;
+  font-size:clamp(.95rem,2.6vw,1.2rem);padding:.55rem 1rem;border:3px solid var(--cream);transform:rotate(-2deg)}
+.ticker{position:absolute;left:0;right:0;bottom:0;background:var(--gold);color:var(--ink);border-top:4px solid var(--cream);
+  padding:.65rem 0 calc(.65rem + env(safe-area-inset-bottom,0px));overflow:hidden;white-space:nowrap}
+.track{display:inline-flex;animation:tick 32s linear infinite}
+.track span{font-family:var(--display);text-transform:uppercase;font-size:clamp(1.25rem,3.4vw,2rem);line-height:1.1;padding-right:1.6rem}
+.track b{color:var(--blue);font-weight:400;padding-right:1.6rem;font-family:var(--display);font-size:clamp(1.25rem,3.4vw,2rem)}
+@keyframes tick{to{transform:translateX(-50%)}}
+.close{position:fixed;z-index:2147483100;top:calc(.9rem + env(safe-area-inset-top,0px));right:calc(.9rem + env(safe-area-inset-right,0px));
+  background:var(--cream);color:var(--ink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--coral);
+  font-weight:800;font-size:1rem;padding:.6rem .95rem;cursor:pointer;touch-action:manipulation}
+.close.loose{right:auto}
+
+/* ---------- Taunt toast ---------- */
+.toast{position:fixed;left:50%;bottom:calc(1.4rem + env(safe-area-inset-bottom,0px));z-index:2147483647;
+  transform:translate(-50%,160%);opacity:0;pointer-events:none;max-width:min(92vw,30rem);text-align:center;
+  background:var(--coral);color:var(--ink);font-weight:900;font-size:1.02rem;line-height:1.3;padding:.8rem 1.2rem;
+  border:3px solid var(--cream);box-shadow:5px 5px 0 var(--gold);transition:transform .25s cubic-bezier(.3,1.4,.5,1),opacity .2s}
+.toast.on{transform:translate(-50%,0);opacity:1}
+body.live .toast{bottom:calc(5.4rem + env(safe-area-inset-bottom,0px))}
+
+@media (max-width:480px){
+  .btn{white-space:normal;width:100%}
+  .ballot{transform:rotate(-.8deg);box-shadow:7px 7px 0 var(--coral)}
+}
+@media (prefers-reduced-motion: reduce){
+  .yes,.rays,.throb,.track{animation:none}
+  .dodger.loose,.toast{transition:none}
+  .ticker{white-space:normal}
+}
+</style>
+</head>
+<body>
+
+<main class="landing" id="landing">
+  <div class="bunting" id="bunting" aria-hidden="true"></div>
+  <h1 style="margin:0">
+    <span class="vote" style="display:block">Vote</span>
+    <span class="stars" style="display:block" aria-hidden="true">★★★</span>
+    <span class="name" style="display:block">Eishah Nadeem</span>
+  </h1>
+  <p class="tagline">Fewer meetings. Better snacks. A thermostat setting everyone can live with.</p>
+
+  <section class="ballot" aria-labelledby="q">
+    <h2 id="q">Will you vote for Eishah Nadeem?</h2>
+    <div class="choices">
+      <button class="btn yes" id="yes" type="button">✅ I will vote for Eishah Nadeem</button>
+      <button class="btn no dodger" id="no" type="button">🙅 I will not vote</button>
+    </div>
+  </section>
+
+  <p class="hint">Tap anywhere to make it official.</p>
+  <div class="stamp">Paid for by the Committee to Elect Eishah Nadeem. Campaign budget: one samosa.</div>
+</main>
+
+<div class="show" id="show" role="dialog" aria-modal="true" aria-label="Vote for Eishah Nadeem">
+  <div class="rays" aria-hidden="true"></div>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+  <div class="stage">
+    <div class="throb">
+      <span class="s-vote">Vote for</span>
+      <span class="s-name"><span>Eishah</span><span>Nadeem</span></span>
+    </div>
+    <div class="s-sub">Polls are open. Polls are always open.</div>
+  </div>
+  <div class="ticker" aria-hidden="true"><div class="track" id="track"></div></div>
+  <button class="close dodger" id="close" type="button">✕ Close</button>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<audio id="song" loop preload="auto" playsinline></audio>
+<div id="ytwrap"style="position:fixed;left:-9999px;top:0;width:200px;height:200px;overflow:hidden;pointer-events:none" aria-hidden="true"><div id="ytp"></div></div>
+
+<script>
+(() => {
+  /* =====================================================================
+     YOUR SONG GOES HERE.
+     Paste a full data URI between the quotes, e.g.
+       const SONG_DATA_URI = "data:audio/mpeg;base64,SUQzBAAAAA...";
+     (mp3 = audio/mpeg, m4a = audio/mp4, wav = audio/wav)
+     Leave it empty to use the built-in Web Audio jingle.
+     ===================================================================== */
+  const SONG_DATA_URI = "";
+  // YouTube audio (starts on the first tap). Falls back to the built-in jingle if it can't play.
+  const YT_ID = "uKQTz30SR9s";
+
+  const $ = s => document.querySelector(s);
+  const reduceMQ = matchMedia('(prefers-reduced-motion: reduce)');
+  const body = document.body;
+  const noBtn = $('#no'), yesBtn = $('#yes'), closeBtn = $('#close'), song = $('#song');
+  let live = false;
+  let blockClickUntil = 0;
+  const pick = a => a[(Math.random() * a.length) | 0];
+
+  if (SONG_DATA_URI) song.src = SONG_DATA_URI;
+
+  /* ---------- Bunting + ticker content ---------- */
+  const bunting = $('#bunting');
+  for (let i = 0; i < 48; i++) bunting.appendChild(document.createElement('span'));
+  const slogans = ['Vote Eishah Nadeem','Fewer meetings, more samosas','Reply-all reform now','One thermostat setting for all',
+    'The printer will work. Eventually.','Chai on every floor','Your inbox, liberated','Four more coffees'];
+  const track = $('#track');
+  const run = slogans.map(s => `<span>${s}</span><b>★</b>`).join('');
+  track.innerHTML = run + run;
+
+  /* ---------- Taunt toast ---------- */
+  const toast = $('#toast'); let toastT;
+  function taunt(msg) {
+    toast.textContent = msg;
+    toast.classList.add('on');
+    clearTimeout(toastT);
+    toastT = setTimeout(() => toast.classList.remove('on'), 2300);
+  }
+
+  /* ---------- Uncatchable buttons ---------- */
+  function nearDist(el, x, y) {
+    const r = el.getBoundingClientRect();
+    const dx = Math.max(r.left - x, 0, x - r.right);
+    const dy = Math.max(r.top - y, 0, y - r.bottom);
+    return Math.hypot(dx, dy);
+  }
+  function Dodger(el, { placeholder = false, onDodge = () => {}, reserveBottom = () => 0, reserveTop = () => 0 }) {
+    let tries = 0, loose = false, last = 0;
+    function place(x, y) { el.style.left = x + 'px'; el.style.top = y + 'px'; }
+    function bounds(r) {
+      const m = 12;
+      return { minX: m, maxX: Math.max(m, innerWidth - r.width - m),
+               minY: m + reserveTop(), maxY: Math.max(m + reserveTop(), innerHeight - r.height - m - reserveBottom()) };
+    }
+    function jump(px, py) {
+      const now = performance.now();
+      if (now - last < 70) return;
+      last = now;
+      const r = el.getBoundingClientRect();
+      if (px == null) { px = r.left + r.width / 2; py = r.top + r.height / 2; }
+      if (!loose) {
+        if (placeholder) {
+          const ph = document.createElement('span');
+          ph.className = 'ph'; ph.style.width = r.width + 'px'; ph.style.height = r.height + 'px';
+          el.before(ph);
+          document.body.appendChild(el); // escape the rotated ballot so position:fixed means the viewport
+        }
+        place(r.left, r.top);
+        el.classList.add('loose');
+        loose = true;
+        el.getBoundingClientRect(); // commit start position so the hop animates
+      }
+      const b = bounds(r);
+      const far = Math.min(innerWidth, innerHeight) * 0.42;
+      let best = null, bestD = -1;
+      for (let i = 0; i < 30; i++) {
+        const x = b.minX + Math.random() * (b.maxX - b.minX);
+        const y = b.minY + Math.random() * (b.maxY - b.minY);
+        const d = Math.hypot(x + r.width / 2 - px, y + r.height / 2 - py);
+        if (d > bestD) { bestD = d; best = [x, y]; }
+        if (d > far) break;
+      }
+      place(best[0], best[1]);
+      tries++;
+      onDodge(tries);
+    }
+    function clamp() {
+      if (!loose) return;
+      const r = el.getBoundingClientRect(), b = bounds(r);
+      place(Math.min(Math.max(r.left, b.minX), b.maxX), Math.min(Math.max(r.top, b.minY), b.maxY));
+    }
+    return { el, jump, clamp };
+  }
+
+  const noTaunts = ['The no button has left the building.','Abstaining is also a vote for Eishah.',
+    'That button is unionized.','Nice reflexes. Still no.','Democracy has spoken. It said yes.'];
+  const noD = Dodger(noBtn, {
+    placeholder: true,
+    onDodge(t) {
+      if (t === 3) { noBtn.textContent = '🙅 nope'; taunt("There is no 'no'."); }
+      else if (t > 3) taunt(t % 4 === 0 ? "There is no 'no'." : pick(noTaunts));
+    }
+  });
+
+  const closeTaunts = ['Close? In this economy?','This rally has no exit.','The close button is campaigning too.',
+    'Polls never close.','Nope. Still voting.'];
+  const ticker = document.querySelector('.ticker');
+  const closeD = Dodger(closeBtn, {
+    reserveBottom: () => ticker.offsetHeight,
+    onDodge(t) {
+      if (t === 3) closeBtn.textContent = '✕ Nope';
+      taunt(pick(closeTaunts));
+    }
+  });
+  const active = () => (live ? closeD : noD);
+
+  const R_MOUSE = 72, R_TOUCH = 56;
+  document.addEventListener('pointermove', e => {
+    const d = active();
+    if (nearDist(d.el, e.clientX, e.clientY) < (e.pointerType === 'mouse' ? R_MOUSE : R_TOUCH)) d.jump(e.clientX, e.clientY);
+  }, { passive: true });
+
+  document.addEventListener('pointerdown', e => {
+    const d = active();
+    if (nearDist(d.el, e.clientX, e.clientY) < R_TOUCH) {
+      e.preventDefault();
+      blockClickUntil = performance.now() + 700;
+      d.jump(e.clientX, e.clientY);
+    }
+  }, true);
+
+  document.addEventListener('touchstart', e => {
+    const t = e.touches[0], d = active();
+    if (t && nearDist(d.el, t.clientX, t.clientY) < R_TOUCH) {
+      e.preventDefault();
+      blockClickUntil = performance.now() + 700;
+      d.jump(t.clientX, t.clientY);
+    }
+  }, { passive: false, capture: true });
+
+  for (const d of [noD, closeD]) {
+    d.el.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); d.jump(); }, true);
+    d.el.addEventListener('focus', () => d.jump());
+  }
+  addEventListener('resize', () => { noD.clamp(); closeD.clamp(); sizeCanvas(); });
+
+  /* ---------- Fullscreen ---------- */
+  const isFull = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
+  function goFull() {
+    const el = document.documentElement;
+    const req = el.requestFullscreen || el.webkitRequestFullscreen;
+    if (!req) return;
+    try { const p = req.call(el, { navigationUI: 'hide' }); if (p && p.catch) p.catch(() => {}); } catch (_) {}
+  }
+  const exitTaunts = ['Nice try. The rally continues.','You left fullscreen. The campaign did not.',
+    'Nice try. Tap anywhere to rejoin the rally.','The music is still going. So is Eishah.'];
+  let exitCount = 0;
+  function onFsChange() {
+    if (live && !isFull()) taunt(exitCount++ === 0 ? exitTaunts[0] : pick(exitTaunts));
+  }
+  document.addEventListener('fullscreenchange', onFsChange);
+  document.addEventListener('webkitfullscreenchange', onFsChange);
+
+  /* ---------- Launch (the one required gesture) ---------- */
+  function launch() {
+    if (live) return;
+    live = true;
+    body.classList.add('live');
+    document.title = '🗳️ VOTE EISHAH NADEEM';
+    goFull();        // must run inside the gesture
+    startAudio();    // must run inside the gesture
+    startConfetti();
+    toast.classList.remove('on');
+  }
+
+  document.addEventListener('click', () => {
+    if (performance.now() < blockClickUntil) return;
+    if (!live) { launch(); return; }
+    if (!isFull()) goFull();
+    resumeAudio();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { if (live) taunt(pick(exitTaunts)); return; }
+    if (['Tab','Shift','Alt','Control','Meta','CapsLock'].includes(e.key) || e.metaKey || e.ctrlKey || e.altKey) return;
+    const f = document.activeElement;
+    if (f === noBtn || f === closeBtn) { e.preventDefault(); active().jump(); return; }
+    if (!live) {
+      if (f === yesBtn && (e.key === 'Enter' || e.key === ' ')) return; // native click launches
+      e.preventDefault(); launch();
+    } else {
+      e.preventDefault();
+      if (!isFull()) goFull();
+      resumeAudio();
+    }
+  });
+
+  /* ---------- Audio ---------- */
+  let ctx = null, master = null, noiseBuf = null, schedTimer = null, usingSong = false;
+  let yt = null, ytReady = false, ytWant = false, ytPlaying = false, ytFailed = false, ytTimer = 0;
+
+  function stopJingle() { clearInterval(schedTimer); schedTimer = null; }
+  function initYT() {
+    if (!YT_ID) return;
+    window.onYouTubeIframeAPIReady = () => {
+      yt = new YT.Player('ytp', {
+        width: '200', height: '200', videoId: YT_ID,
+        playerVars: { playsinline: 1, controls: 0, disablekb: 1, rel: 0, loop: 1, playlist: YT_ID },
+        events: {
+          onReady: () => { ytReady = true; if (ytWant) yt.playVideo(); },
+          onStateChange: e => { if (e.data === 1) { ytPlaying = true; stopJingle(); } },
+          onError: () => { ytFailed = true; if (live) startJingle(); }
+        }
+      });
+    };
+    const s = document.createElement('script');
+    s.src = 'https://www.youtube.com/iframe_api';
+    s.onerror = () => { ytFailed = true; if (live) startJingle(); };
+    document.head.appendChild(s);
+  }
+  initYT();
+
+  function ensureCtx() {
+    if (ctx) return;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    ctx = new AC();
+    const comp = ctx.createDynamicsCompressor();
+    comp.threshold.value = -14; comp.ratio.value = 4;
+    master = ctx.createGain(); master.gain.value = 0.55;
+    master.connect(comp); comp.connect(ctx.destination);
+    noiseBuf = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
+    const d = noiseBuf.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+  }
+  function resumeAudio() {
+    if (ctx && ctx.state !== 'running') ctx.resume().catch(() => {});
+    if (usingSong && song.paused) song.play().catch(() => {});
+    if (yt && ytReady && !ytFailed && ![1, 3].includes(yt.getPlayerState())) yt.playVideo();
+  }
+  function startAudio() {
+    try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (_) {}
+    ensureCtx();
+    if (ctx) ctx.resume().catch(() => {});
+    if (YT_ID && !ytFailed) {
+      ytWant = true;
+      if (ytReady) yt.playVideo();
+      if (live && !ytTimer) ytTimer = setTimeout(() => { if (!ytPlaying) startJingle(); }, 4000);
+    } else if (SONG_DATA_URI) {
+      usingSong = true;
+      const p = song.play();
+      if (p && p.catch) p.catch(() => { usingSong = false; startJingle(); });
+    } else {
+      startJingle();
+    }
+  }
+
+  // A cheesy brass fanfare in C major, 140 bpm, 4 bars on loop.
+  const BPM = 140, E8 = 60 / BPM / 2, STEPS = 32;
+  const mtof = m => 440 * Math.pow(2, (m - 69) / 12);
+  const melody = [[0,67,1],[1,67,1],[2,67,1],[3,72,3],[6,76,1],[7,74,1],[8,72,2],[10,76,2],[12,79,4],
+    [16,81,1],[17,79,1],[18,76,1],[19,72,1],[20,74,2],[22,76,2],[24,72,2],[26,67,1],[27,71,1],[28,72,4]];
+  const harmony = [[3,64,3],[12,72,4],[12,76,4],[20,71,2],[22,72,2],[28,76,4],[28,79,4]];
+  const byStep = Array.from({ length: STEPS }, () => []);
+  for (const [s, m, l] of melody) byStep[s].push([m, l, 0.17]);
+  for (const [s, m, l] of harmony) byStep[s].push([m, l, 0.09]);
+  const bassRoot = s => (s < 16 ? 36 : s < 20 ? 41 : s < 24 ? 43 : 36);
+
+  function brass(t, midi, dur, vol) {
+    const f = mtof(midi);
+    const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.Q.value = 3;
+    lp.frequency.setValueAtTime(700, t);
+    lp.frequency.linearRampToValueAtTime(3400, t + 0.05);
+    lp.frequency.exponentialRampToValueAtTime(1500, t + dur);
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + 0.03);
+    g.gain.exponentialRampToValueAtTime(vol * 0.7, t + dur * 0.8);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.09);
+    for (const det of [-8, 8]) {
+      const o = ctx.createOscillator(); o.type = 'sawtooth'; o.frequency.value = f; o.detune.value = det;
+      if (dur > 0.4) { // a little vibrato on held notes
+        const lfo = ctx.createOscillator(), lg = ctx.createGain();
+        lfo.frequency.value = 5.5; lg.gain.value = 9; lfo.connect(lg); lg.connect(o.detune);
+        lfo.start(t + 0.15); lfo.stop(t + dur + 0.12);
+      }
+      o.connect(lp); o.start(t); o.stop(t + dur + 0.12);
+    }
+    lp.connect(g); g.connect(master);
+  }
+  function bass(t, midi) {
+    const o = ctx.createOscillator(); o.type = 'square'; o.frequency.value = mtof(midi);
+    const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 520;
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.16, t + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + E8 * 0.85);
+    o.connect(lp); lp.connect(g); g.connect(master); o.start(t); o.stop(t + E8);
+  }
+  function kick(t) {
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.frequency.setValueAtTime(150, t); o.frequency.exponentialRampToValueAtTime(42, t + 0.12);
+    g.gain.setValueAtTime(0.6, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.3);
+    o.connect(g); g.connect(master); o.start(t); o.stop(t + 0.32);
+  }
+  function noise(t, hp, vol, decay) {
+    const n = ctx.createBufferSource(); n.buffer = noiseBuf;
+    const f = ctx.createBiquadFilter(); f.type = 'highpass'; f.frequency.value = hp;
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + decay);
+    n.connect(f); f.connect(g); g.connect(master); n.start(t, Math.random() * 0.5); n.stop(t + decay + 0.02);
+  }
+  const snare = (t, v = 0.28) => {
+    noise(t, 1300, v, 0.16);
+    const o = ctx.createOscillator(), g = ctx.createGain(); o.type = 'triangle'; o.frequency.value = 190;
+    g.gain.setValueAtTime(v * 0.6, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.08);
+    o.connect(g); g.connect(master); o.start(t); o.stop(t + 0.1);
+  };
+
+  function playStep(s, t) {
+    for (const [m, l, v] of byStep[s]) brass(t, m, l * E8 * 0.95, v);
+    bass(t, bassRoot(s) + (s % 2 ? 12 : 0));
+    if (s % 4 === 0) kick(t);
+    if (s % 4 === 2) snare(t);
+    noise(t, 7500, s % 2 ? 0.035 : 0.06, 0.04);
+    if (s >= 29) snare(t + E8 / 2, 0.18); // roll into the loop
+  }
+  function startJingle() {
+    if (!ctx || schedTimer) return;
+    let step = 0, next = ctx.currentTime + 0.08;
+    schedTimer = setInterval(() => {
+      if (next < ctx.currentTime - 0.05) next = ctx.currentTime + 0.05; // recover after tab throttling
+      while (next < ctx.currentTime + 0.25) {
+        playStep(step, next);
+        next += E8; step = (step + 1) % STEPS;
+      }
+    }, 25);
+  }
+
+  // Try to start the music as soon as the page opens. Browsers usually block this until the
+  // first tap/click/key, in which case launch() -> startAudio() (idempotent) takes over.
+  startAudio();
+  goFull(); // fullscreen is also blocked until a first tap/click/key, so launch() retries on the first gesture
+
+  // Also try on any pointer/touch/mouse movement. Hover alone is not a user gesture, so browsers
+  // usually ignore it until a real tap/click/key; the attempts are harmless and throttled.
+  let lastTry = 0;
+  const tryAudio = () => {
+    const n = performance.now();
+    if (n - lastTry < 800) return;
+    lastTry = n;
+    startAudio();
+    resumeAudio();
+  };
+  ['pointerdown', 'touchstart', 'mousemove'].forEach(t =>
+    document.addEventListener(t, tryAudio, { passive: true }));
+
+  /* ---------- Confetti ---------- */
+  const cv = $('#confetti'), cx = cv.getContext('2d');
+  const COLORS = ['#FFC23D', '#FF6A55', '#2E7BFF', '#FFF3DA'];
+  let W = 0, H = 0, parts = [], raf = 0, lastT = 0;
+  function sizeCanvas() {
+    if (!live) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    if (reduceMQ.matches) drawStatic();
+  }
+  function piece(x, y, vx, vy) {
+    return { x, y, vx, vy, w: 6 + Math.random() * 8, h: 9 + Math.random() * 11, r: Math.random() * 6.28,
+      vr: (Math.random() - 0.5) * 0.22, c: COLORS[(Math.random() * 4) | 0], ph: Math.random() * 6.28,
+      term: 1.8 + Math.random() * 2.2 };
+  }
+  function drawPiece(p) {
+    cx.save(); cx.translate(p.x, p.y); cx.rotate(p.r);
+    cx.fillStyle = p.c; cx.fillRect(-p.w / 2, -p.h / 2 * Math.abs(Math.cos(p.ph)), p.w, p.h * Math.abs(Math.cos(p.ph)) + 1);
+    cx.restore();
+  }
+  function drawStatic() {
+    cx.clearRect(0, 0, W, H);
+    for (let i = 0; i < 70; i++) drawPiece(piece(Math.random() * W, Math.random() * H, 0, 0));
+  }
+  function startConfetti() {
+    sizeCanvas();
+    if (reduceMQ.matches) return;
+    const n = Math.round(Math.min(230, (W * H) / 5500));
+    for (let i = 0; i < n; i++) parts.push(piece(Math.random() * W, -20 - Math.random() * H, (Math.random() - 0.5) * 1.2, 1 + Math.random() * 2));
+    for (let i = 0; i < 140; i++) { // cannon blasts from the bottom corners
+      const left = i % 2 === 0;
+      parts.push(piece(left ? 0 : W, H, (left ? 1 : -1) * (3 + Math.random() * 7), -(9 + Math.random() * 9)));
+    }
+    lastT = performance.now();
+    raf = requestAnimationFrame(frame);
+  }
+  function frame(now) {
+    const k = Math.min(3, (now - lastT) / 16.67); lastT = now;
+    cx.clearRect(0, 0, W, H);
+    for (const p of parts) {
+      p.vy = Math.min(p.vy + 0.2 * k, p.term);
+      p.vx *= Math.pow(0.985, k);
+      p.ph += 0.09 * k;
+      p.x += (p.vx + Math.sin(p.ph) * 0.6) * k;
+      p.y += p.vy * k;
+      p.r += p.vr * k;
+      if (p.y > H + 24) { p.y = -20; p.x = Math.random() * W; p.vx = (Math.random() - 0.5) * 1.2; }
+      if (p.x < -30) p.x = W + 20; else if (p.x > W + 30) p.x = -20;
+      drawPiece(p);
+    }
+    raf = requestAnimationFrame(frame);
+  }
+})();
+</script>
+</body>
+</html>
