@@ -375,12 +375,20 @@ body.live .toast{bottom:calc(5.4rem + env(safe-area-inset-bottom,0px))}
   function stopJingle() { clearInterval(schedTimer); schedTimer = null; }
   function initYT() {
     if (!YT_ID) return;
+    // Build the iframe ourselves so it can carry allow="autoplay" (lets sound autoplay where the browser permits it).
+    const fr = document.createElement('iframe');
+    fr.id = 'ytp'; fr.width = 200; fr.height = 200; fr.allow = 'autoplay; encrypted-media';
+    fr.src = 'https://www.youtube.com/embed/' + YT_ID + '?enablejsapi=1&playsinline=1&controls=0&disablekb=1&rel=0&loop=1&playlist=' + YT_ID +
+      (location.protocol.startsWith('http') ? '&origin=' + encodeURIComponent(location.origin) : '');
+    $('#ytp').replaceWith(fr);
     window.onYouTubeIframeAPIReady = () => {
-      yt = new YT.Player('ytp', {
-        width: '200', height: '200', videoId: YT_ID,
-        playerVars: { playsinline: 1, controls: 0, disablekb: 1, rel: 0, loop: 1, playlist: YT_ID, autoplay: 1, mute: 1 },
+      yt = new YT.Player(fr, {
         events: {
-          onReady: () => { ytReady = true; yt.mute(); yt.playVideo(); },
+          onReady: () => {
+            ytReady = true;
+            yt.unMute(); yt.playVideo(); // try with sound first
+            setTimeout(() => { if (yt.getPlayerState() !== 1) { yt.mute(); yt.playVideo(); } }, 1200); // blocked -> muted autoplay
+          },
           onStateChange: e => { if (e.data === 1) { ytPlaying = true; stopJingle(); } },
           onError: () => { ytFailed = true; if (live) startJingle(); }
         }
