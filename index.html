@@ -216,6 +216,7 @@ body.curtained{overflow:hidden}
   const SONG_DATA_URI = "";
   // YouTube audio (starts on the first tap). Falls back to the built-in jingle if it can't play.
   const YT_ID = "uKQTz30SR9s";
+  const VOTED_KEY = "eishah_voted";
   const ALLOW_JINGLE = false; // true = play the built-in synth jingle when YouTube cannot play
 
   const $ = s => document.querySelector(s);
@@ -374,6 +375,7 @@ body.curtained{overflow:hidden}
   function launch() {
     if (live) return;
     live = true;
+    try { localStorage.setItem(VOTED_KEY, '1'); } catch (_) {} // remembered: reloads stay on the vote screen
     body.classList.add('live');
     document.title = '🗳️ VOTE EISHAH NADEEM';
     goFull();        // must run inside the gesture
@@ -666,6 +668,16 @@ body.curtained{overflow:hidden}
       drawPiece(p);
     }
     raf = requestAnimationFrame(frame);
+  }
+
+  /* ---------- Remembered vote: if the key is present, skip the curtains and stay on the vote screen ---------- */
+  let voted = false;
+  try { voted = localStorage.getItem(VOTED_KEY) === '1'; } catch (_) {}
+  if (voted) {
+    opened = true;
+    curtains.classList.add('gone');
+    body.classList.remove('curtained');
+    launch(); // fullscreen/sound still wait for the first tap, which the click handlers pick up
   }
 })();
 </script>
