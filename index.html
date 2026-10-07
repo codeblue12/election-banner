@@ -125,9 +125,43 @@ body.live .toast{bottom:calc(5.4rem + env(safe-area-inset-bottom,0px))}
   .dodger.loose,.toast{transition:none}
   .ticker{white-space:normal}
 }
+
+/* ---------- Curtains ---------- */
+body.curtained{overflow:hidden}
+.curtains{position:fixed;inset:0;z-index:2147483200;display:flex;cursor:pointer;overflow:hidden;
+  background:transparent;-webkit-tap-highlight-color:transparent}
+.curtains.gone{display:none}
+.curtain{position:relative;width:50%;height:100%;flex:none;will-change:transform;
+  transition:transform 1.9s cubic-bezier(.77,0,.18,1);
+  background:
+    repeating-linear-gradient(90deg,rgba(0,0,0,.38) 0,rgba(0,0,0,0) 3.5%,rgba(255,255,255,.07) 7%,rgba(0,0,0,.38) 10.5%),
+    linear-gradient(180deg,#7d0f1f,#4d0711 85%,#2e040a);
+  box-shadow:inset 0 0 90px rgba(0,0,0,.6)}
+.curtain.l{transform-origin:left;border-right:5px solid var(--gold);box-shadow:inset 0 0 90px rgba(0,0,0,.6),8px 0 28px rgba(0,0,0,.5)}
+.curtain.r{transform-origin:right;border-left:5px solid var(--gold);box-shadow:inset 0 0 90px rgba(0,0,0,.6),-8px 0 28px rgba(0,0,0,.5)}
+.curtains::before{content:'';position:absolute;left:0;right:0;top:0;height:2.4rem;z-index:2;
+  background:linear-gradient(180deg,#d9a21b,#ffc23d 45%,#8a6000);box-shadow:0 6px 14px rgba(0,0,0,.5)}
+.curtains::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1.1rem;z-index:2;
+  background:repeating-linear-gradient(90deg,#ffc23d 0 6px,#8a6000 6px 9px)}
+.curtains.open .curtain.l{transform:translateX(-102%) scaleX(.82)}
+.curtains.open .curtain.r{transform:translateX(102%) scaleX(.82)}
+.curtains.open::before,.curtains.open::after{opacity:0;transition:opacity .9s ease .9s}
+.curtain-hint{position:absolute;z-index:3;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;
+  font-family:var(--display);text-transform:uppercase;letter-spacing:.06em;font-size:clamp(1.4rem,4.6vw,2.6rem);
+  color:var(--cream);text-shadow:0 3px 0 rgba(0,0,0,.55);pointer-events:none;animation:cpulse 1.6s ease-in-out infinite;
+  transition:opacity .35s ease}
+.curtain-hint small{display:block;margin-top:.5rem;font-size:.42em;letter-spacing:.14em;color:var(--gold)}
+.curtains.open .curtain-hint{opacity:0;animation:none}
+@keyframes cpulse{50%{transform:translate(-50%,-50%) scale(1.06)}}
+@media (prefers-reduced-motion: reduce){.curtain{transition-duration:.6s}.curtain-hint{animation:none}}
 </style>
 </head>
-<body>
+<body class="curtained">
+
+<div class="curtains" id="curtains" role="button" tabindex="0" aria-label="Click to open the curtains">
+  <div class="curtain l"></div><div class="curtain r"></div>
+  <div class="curtain-hint">Click to reveal<small>★ the curtains are waiting ★</small></div>
+</div>
 
 <main class="landing" id="landing">
   <div class="bunting" id="bunting" aria-hidden="true"></div>
@@ -527,6 +561,16 @@ body.live .toast{bottom:calc(5.4rem + env(safe-area-inset-bottom,0px))}
     if (yt && ytReady && !ytFailed) { if (yt.isMuted()) { yt.unMute(); yt.setVolume(100); } if (yt.getPlayerState() !== 1) yt.playVideo(); }
   };
   ['pointerdown', 'touchstart', 'keydown', 'click'].forEach(t => document.addEventListener(t, unmuteYT, { capture: true, passive: true }));
+  // Cursor movement is not a real user gesture, so browsers usually refuse to unmute from it; try anyway (throttled),
+  // and if the browser pauses the video because of that, put it back to muted playback.
+  let lastMove = 0;
+  document.addEventListener('mousemove', () => {
+    const n = performance.now();
+    if (n - lastMove < 1000 || !yt || !ytReady || ytFailed || !yt.isMuted()) return;
+    lastMove = n;
+    yt.unMute(); yt.setVolume(100); yt.playVideo();
+    setTimeout(() => { if (yt.getPlayerState() !== 1) { yt.mute(); yt.playVideo(); } }, 700);
+  }, { passive: true });
 
   // Also try on any pointer/touch/mouse movement. Hover alone is not a user gesture, so browsers
   // usually ignore it until a real tap/click/key; the attempts are harmless and throttled.
@@ -540,6 +584,23 @@ body.live .toast{bottom:calc(5.4rem + env(safe-area-inset-bottom,0px))}
   };
   ['pointerdown', 'touchstart', 'mousemove'].forEach(t =>
     document.addEventListener(t, tryAudio, { passive: true }));
+
+  /* ---------- Curtains: click to reveal ---------- */
+  const curtains = $('#curtains');
+  let opened = false;
+  function openCurtains() {
+    if (opened) return;
+    opened = true;
+    blockClickUntil = performance.now() + 400; // the reveal click must not also press a button underneath
+    curtains.classList.add('open');
+    startAudio(); resumeAudio(); unmuteYT(); // the reveal click is the gesture that lets the song play with sound
+    const done = () => { curtains.classList.add('gone'); body.classList.remove('curtained'); };
+    curtains.querySelector('.curtain.l').addEventListener('transitionend', done, { once: true });
+    setTimeout(done, 2600); // safety net if transitionend never fires
+  }
+  curtains.addEventListener('click', openCurtains);
+  curtains.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openCurtains(); } });
+  curtains.focus();
 
   /* ---------- Confetti ---------- */
   const cv = $('#confetti'), cx = cv.getContext('2d');
