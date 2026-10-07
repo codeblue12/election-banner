@@ -162,6 +162,16 @@ body.live .toast{bottom:calc(5.4rem + env(safe-area-inset-bottom,0px))}
   .fighter.a,.fighter.b,.fighter img,.boom{animation:none}
   .fighter.a{transform:translateX(calc(var(--D) * -1))}.fighter.b{transform:translateX(var(--D))}.boom{display:none}}
 
+/* ---------- Side portraits: fixed at the middle of the left and right edges, spinning ---------- */
+.spin{position:fixed;top:50%;z-index:2147483050;pointer-events:none;--S:clamp(68px,17vw,150px);
+  width:var(--S);height:var(--S);margin-top:calc(var(--S) / -2)}
+.spin.l{left:12px}.spin.r{right:12px}
+.spin img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;background:var(--cream);
+  border:4px solid var(--cream);box-shadow:0 0 0 3px var(--gold),0 8px 20px rgba(0,0,0,.65);animation:spin360 7s linear infinite}
+.spin.r img{animation-direction:reverse}
+@keyframes spin360{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.spin img{animation:none}}
+
 /* ---------- Curtains ---------- */
 html,body{overscroll-behavior:none}
 body.curtained{overflow:hidden}
@@ -249,6 +259,9 @@ body.curtained{overflow:hidden}
   <div class="fighter b"><img src="banner4.webp" alt="" draggable="false"></div>
   <div class="boom"></div>
 </div>
+
+<div class="spin l" aria-hidden="true"><img src="banner5.webp" alt="" draggable="false"></div>
+<div class="spin r" aria-hidden="true"><img src="banner6.webp" alt="" draggable="false"></div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
