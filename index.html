@@ -593,6 +593,7 @@ body.curtained{overflow:hidden}
     opened = true;
     blockClickUntil = performance.now() + 400; // the reveal click must not also press a button underneath
     curtains.classList.add('open');
+    setTimeout(() => { if (!ytPlaying) startJingle(); }, 3000); // YouTube blocked (e.g. file opened from disk) -> built-in jingle
     startAudio(); resumeAudio(); unmuteYT(); // the reveal click is the gesture that lets the song play with sound
     const done = () => { curtains.classList.add('gone'); body.classList.remove('curtained'); };
     curtains.querySelector('.curtain.l').addEventListener('transitionend', done, { once: true });
