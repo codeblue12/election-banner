@@ -129,6 +129,10 @@ body.live .toast{bottom:calc(5.4rem + env(safe-area-inset-bottom,0px))}
 /* ---------- Clash banner: two portraits drift apart, rush back, collide in the middle, drift apart again ---------- */
 .clash{position:fixed;left:0;right:0;top:calc(.6rem + env(safe-area-inset-top,0px));height:var(--S);z-index:2147483050;pointer-events:none;
   --S:clamp(68px,17vw,150px);--edge:12px;--D:calc(50vw - var(--S) - var(--edge));--T:9s}
+.clash.down{top:auto;bottom:calc(5rem + env(safe-area-inset-bottom,0px))}
+.clash.down .fighter,.clash.down .boom,.clash.down .fighter img{animation-delay:calc(var(--T) / -2)}
+.clash.down .fighter img{animation-delay:-1.4s}
+.clash.down .fighter.b img{animation-delay:-2.5s}
 .fighter{position:absolute;top:0;left:50%;width:var(--S);height:var(--S);will-change:transform}
 .fighter.a{margin-left:calc(var(--S) * -1);animation:fa var(--T) infinite}
 .fighter.b{animation:fb var(--T) infinite}
@@ -234,6 +238,12 @@ body.curtained{overflow:hidden}
 <div class="clash" aria-hidden="true">
   <div class="fighter a"><img src="banner1.webp" alt="" draggable="false"></div>
   <div class="fighter b"><img src="banner2.webp" alt="" draggable="false"></div>
+  <div class="boom"></div>
+</div>
+
+<div class="clash down" aria-hidden="true">
+  <div class="fighter a"><img src="banner3.webp" alt="" draggable="false"></div>
+  <div class="fighter b"><img src="banner4.webp" alt="" draggable="false"></div>
   <div class="boom"></div>
 </div>
 
