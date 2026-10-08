@@ -203,7 +203,15 @@ body.curtained{overflow:hidden}
 .curtain-hint small{display:block;margin-top:.5rem;font-size:.42em;letter-spacing:.14em;color:var(--cream);opacity:.8}
 .curtains.open .curtain-hint{opacity:0;animation:none}
 @keyframes cpulse{50%{transform:translate(-50%,-50%) scale(1.06)}}
-@media (prefers-reduced-motion: reduce){.curtain{transition-duration:.6s}.curtain-hint{animation:none}}
+.curtain-volume{position:absolute;z-index:3;left:50%;bottom:clamp(1.5rem,9vh,5rem);transform:translateX(-50%);width:max-content;max-width:90vw;
+  text-align:center;pointer-events:none;font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;
+  font-size:clamp(.85rem,2.4vw,1.4rem);color:var(--gold);transition:opacity .35s ease;
+  text-shadow:0 0 6px rgba(255,200,80,.9),0 0 18px rgba(255,170,40,.6),0 2px 0 rgba(0,0,0,.7);animation:cglow 2.2s ease-in-out infinite}
+.curtain-volume span{display:inline-block;margin-right:.6em;animation:cwave 1.2s ease-in-out infinite}
+.curtains.open .curtain-volume{opacity:0;animation:none}
+@keyframes cglow{50%{text-shadow:0 0 10px rgba(255,220,120,1),0 0 30px rgba(255,170,40,.9),0 2px 0 rgba(0,0,0,.7);opacity:.75}}
+@keyframes cwave{50%{transform:scale(1.25) rotate(-8deg)}}
+@media (prefers-reduced-motion: reduce){.curtain{transition-duration:.6s}.curtain-hint,.curtain-volume,.curtain-volume span{animation:none}}
 </style>
 </head>
 <body class="curtained">
@@ -211,6 +219,7 @@ body.curtained{overflow:hidden}
 <div class="curtains" id="curtains" role="button" tabindex="0" aria-label="Click to open the curtains">
   <div class="curtain l"></div><div class="curtain r"></div>
   <div class="curtain-hint">Click to reveal<small>★ the curtains are waiting ★</small></div>
+  <div class="curtain-volume"><span aria-hidden="true">🔊</span>Turn your volume on for a better experience</div>
 </div>
 
 <main class="landing" id="landing">
